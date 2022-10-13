@@ -24,9 +24,11 @@ type ExtractKeys<Config extends ApiTemplate> = {
     ? MethodName
     : never
 }[keyof Config]
-type QueryNameTemplates<Prefixes extends string[]> = {
-  [Prefix in keyof Prefixes]: `${Prefixes[Prefix]}${string}`
-}[number]
+type QueryNameTemplates<Prefixes extends string[]> = Prefixes extends []
+  ? string
+  : {
+      [Prefix in keyof Prefixes]: `${Prefixes[Prefix]}${string}`
+    }[number]
 type QueryPaths<Contract extends ApiTemplate, Prefixes extends string[]> = {
   [QueryName in keyof Contract]-?: QueryName extends QueryNameTemplates<Prefixes>
     ? Contract[QueryName] extends Function
