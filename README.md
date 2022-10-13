@@ -1,2 +1,3 @@
-# webrpc-react-query
-WebRPC adapter for React Query
+# webRPC react-query client
+
+Server synchronization made easy & type-safe!
