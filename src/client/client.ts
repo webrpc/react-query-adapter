@@ -19,9 +19,6 @@ interface WebRPCError extends Error {
   readonly status: number
 }
 
-// type ExtractKeys<Config extends ApiTemplate['query' | 'mutation']> = {
-//   [MethodName in keyof Config]-?: Config[MethodName] extends Function ? MethodName : never
-// }[keyof Config]
 type ExtractKeys<Config extends ApiTemplate> = {
   [MethodName in keyof Config]-?: Config[MethodName] extends Function
     ? MethodName
@@ -29,14 +26,11 @@ type ExtractKeys<Config extends ApiTemplate> = {
 }[keyof Config]
 type QueryNameTemplates<Prefixes extends string[]> = {
   [Prefix in keyof Prefixes]: `${Prefixes[Prefix]}${string}`
-}
-type QueryPaths<
-  Contract extends ApiTemplate,
-  Prefixes extends string[] = [],
-> = {
-  [Query in keyof Contract]-?: Query extends QueryNameTemplates<Prefixes>
-    ? Contract[Query] extends Function
-      ? Query
+}[number]
+type QueryPaths<Contract extends ApiTemplate, Prefixes extends string[]> = {
+  [QueryName in keyof Contract]-?: QueryName extends QueryNameTemplates<Prefixes>
+    ? Contract[QueryName] extends Function
+      ? QueryName
       : never
     : never
 }[keyof Contract]
@@ -48,12 +42,15 @@ type ClientQueries<Contract extends ApiTemplate, Prefixes extends string[]> = {
     awaitedResponse: Awaited<ReturnType<Contract[Query]>>
   }
 }
-type MutationPaths<Contract extends ApiTemplate> = Exclude<
-  ExtractKeys<Contract>,
-  QueryPaths<Contract>
->
-type ClientMutations<Contract extends ApiTemplate> = {
-  [Mutation in MutationPaths<Contract>]: {
+type MutationPaths<
+  Contract extends ApiTemplate,
+  QueryPrefixes extends string[],
+> = Exclude<ExtractKeys<Contract>, QueryPaths<Contract, QueryPrefixes>>
+type ClientMutations<
+  Contract extends ApiTemplate,
+  QueryPrefixes extends string[],
+> = {
+  [Mutation in MutationPaths<Contract, QueryPrefixes>]: {
     args: Parameters<Contract[Mutation]>[0]
     headers: Parameters<Contract[Mutation]>[1]
     response: ReturnType<Contract[Mutation]>
@@ -100,8 +97,11 @@ export class WebRpcClient<
   }
 
   public useMutation<
-    TPath extends MutationPaths<Api> & string,
-    TMutationOutput extends ClientMutations<Api>[TPath]['awaitedResponse'],
+    TPath extends MutationPaths<Api, QueryPrefixes> & string,
+    TMutationOutput extends ClientMutations<
+      Api,
+      QueryPrefixes
+    >[TPath]['awaitedResponse'],
     TMutationInput extends inferHandlerInput<Api[TPath]>,
   >(
     path: [TPath] | TPath,
