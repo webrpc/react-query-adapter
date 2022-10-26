@@ -1,6 +1,8 @@
-# webRPC react-query client
+react-query adapter for webrpc
+==============================
 
 Server synchronization made easy & type-safe!
+
 ## How to use
 
 First, you'll need an api contract, ideally in the webRPC format.
@@ -27,4 +29,5 @@ const client = new WebRpcClient<typeof ContractInstance, ['get', 'list']>(
 ```
 
 With this configuration, you can only use `client.useQuery` hook with paths that start with either `'get'` or `'list'`.
+
 Any other method from your contract will be considered a _mutation_. If you choose not to provide _query prefixes_, you will be able to call both `client.useQuery` and `client.useMutation` with any path from your contract.

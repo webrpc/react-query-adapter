@@ -1,1 +1,1 @@
-export { WebRpcClient } from './client/client'
+export { WebRpcQueryClient } from './adapter'

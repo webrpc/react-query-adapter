@@ -8,7 +8,8 @@ import {
   useQuery as __useQuery,
   UseQueryOptions,
 } from '@tanstack/react-query'
-import { Awaited } from 'types/utility'
+
+import { Awaited } from './util'
 
 export interface ApiTemplate {
   [methodName: string]: any
@@ -24,11 +25,13 @@ type ExtractKeys<Config extends ApiTemplate> = {
     ? MethodName
     : never
 }[keyof Config]
+
 type QueryNameTemplates<Prefixes extends string[]> = Prefixes extends []
   ? string
   : {
       [Prefix in keyof Prefixes]: `${Prefixes[Prefix]}${string}`
     }[number]
+
 type QueryPaths<Contract extends ApiTemplate, Prefixes extends string[]> = {
   [QueryName in keyof Contract]-?: QueryName extends QueryNameTemplates<Prefixes>
     ? Contract[QueryName] extends Function
@@ -36,6 +39,7 @@ type QueryPaths<Contract extends ApiTemplate, Prefixes extends string[]> = {
       : never
     : never
 }[keyof Contract]
+
 type ClientQueries<Contract extends ApiTemplate, Prefixes extends string[]> = {
   [Query in QueryPaths<Contract, Prefixes>]: {
     args: Parameters<Contract[Query]>[0]
@@ -44,10 +48,12 @@ type ClientQueries<Contract extends ApiTemplate, Prefixes extends string[]> = {
     awaitedResponse: Awaited<ReturnType<Contract[Query]>>
   }
 }
+
 type MutationPaths<
   Contract extends ApiTemplate,
   QueryPrefixes extends string[],
 > = Exclude<ExtractKeys<Contract>, QueryPaths<Contract, QueryPrefixes>>
+
 type ClientMutations<
   Contract extends ApiTemplate,
   QueryPrefixes extends string[],
@@ -59,6 +65,7 @@ type ClientMutations<
     awaitedResponse: Awaited<ReturnType<Contract[Mutation]>>
   }
 }
+
 type inferHandlerInput<TProcedure extends ApiTemplate[string]> =
   TProcedure extends (args: infer TInput, headers?: any) => Promise<any>
     ? undefined extends TInput // ? is input optional
@@ -68,12 +75,11 @@ type inferHandlerInput<TProcedure extends ApiTemplate[string]> =
       : TInput // -> input is required
     : undefined | null // -> there is no input
 
-export class WebRpcClient<
+export class WebRpcQueryClient<
   Api extends ApiTemplate,
   QueryPrefixes extends string[] = [],
 > {
   public queryClient: QueryClient
-
   private contract: Api
 
   constructor(contract: Api, queryClientConfig?: QueryClientConfig) {
