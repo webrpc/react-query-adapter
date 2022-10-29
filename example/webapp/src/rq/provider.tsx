@@ -8,8 +8,16 @@ export const WebRpcQueryClientProvider = <
 >(props: {
   client: WebRpcQueryClient<Api, QueryPrefixes>
   children: React.ReactNode
-}) => (
-  <QueryClientProvider client={props.client.queryClient}>
-    {props.children}
-  </QueryClientProvider>
-)
+}) => {
+  return (
+    <QueryClientProvider client={props.client.queryClient}>
+      {props.children}
+    </QueryClientProvider>
+  )
+
+  // return React.createElement(
+  //   QueryClientProvider,
+  //   { client: props.client.queryClient },
+  //   props.children
+  // )
+}
