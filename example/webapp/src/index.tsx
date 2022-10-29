@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom/client'
 // import './index.css'
 import { App }  from './App'
 
-import { Example } from './client.gen'
-import { WebRpcQueryClient, WebRpcQueryClientProvider } from './rq'
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
-import { client } from './hmm'
+const queryClient = new QueryClient()
+
+import { Example } from './client.gen'
+// import { WebRpcQueryClient, WebRpcQueryClientProvider } from './rq'
+
+// import { client } from './hmm'
 
 
 const root = ReactDOM.createRoot(
@@ -20,7 +30,7 @@ const root = ReactDOM.createRoot(
 // )
 
 root.render(
-  <WebRpcQueryClientProvider client={client}>
+  <QueryClientProvider client={queryClient}>
     <App />
-  </WebRpcQueryClientProvider>
+  </QueryClientProvider>
 )
