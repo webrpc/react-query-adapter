@@ -1,4 +1,4 @@
-import React from 'react'
+import { createElement } from 'react'
 import { ApiTemplate, WebRpcQueryClient } from './adapter'
 import { QueryClientProvider } from '@tanstack/react-query'
 
@@ -13,7 +13,7 @@ export const WebRpcQueryClientProvider = <
   //   {props.children}
   // </QueryClientProvider>
 
-  return React.createElement(
+  return createElement(
     QueryClientProvider,
     { client: props.client.queryClient },
     props.children

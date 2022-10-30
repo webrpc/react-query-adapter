@@ -1,8 +1,10 @@
 import { Example } from './client.gen'
-import { WebRpcQueryClient, WebRpcQueryClientProvider } from './rq'
+import { WebRpcQueryClient } from 'webrpc-react-query'
 
 
 const _fetch = (a, b) => window.fetch(a, b)
-const exampleRpc = new Example('http://localhost:4242', _fetch)
+const rpc = new Example('http://localhost:4242', _fetch)
 
-export const client = new WebRpcQueryClient(exampleRpc)
+export { rpc }
+
+export const client = new WebRpcQueryClient(rpc)

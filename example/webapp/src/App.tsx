@@ -1,27 +1,21 @@
 import React, { useEffect } from 'react'
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-} from '@tanstack/react-query'
-
+import { rpc, client } from './hmm'
 
 export const App = () => {
   // const queryClient = useQueryClient()
 
-  const query = useQuery(['todos'], () => {
-    return {
-      name: 'ffffff'
-    }
-  })
+  // const query = useQuery(['todos'], () => {
+  //   return rpc.getUser({ userID: 1 })
+  // })
+
+  const query = client.useQuery(['getUser', { userID: 1 }])
 
   return (
     <div className="App">
       sup
 
-      <p>{query.data?.name}</p>
+      <p>{query.data?.user.USERNAME}</p>
     </div>
   )
 
