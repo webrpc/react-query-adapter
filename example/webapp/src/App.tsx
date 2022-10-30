@@ -13,9 +13,9 @@ export const App = () => {
 
   return (
     <div className="App">
-      sup
+      welcome to the @webrpc/react-query example.
 
-      <p>{query.data?.user.USERNAME}</p>
+      <p>Username from rpc server: {query.data?.user.USERNAME}</p>
     </div>
   )
 

@@ -8,3 +8,11 @@ const _fetch = (a, b) => window.fetch(a, b)
 export const rpcClient = new Example('http://localhost:4242', _fetch)
 
 export const rpcQueryClient = new WebRpcQueryClient(rpcClient)
+
+// export const rpcQueryClient = new WebRpcQueryClient(rpcClient, {
+//   defaultOptions: {
+//     queries: {
+//       refetchOnWindowFocus: false,
+//     },
+//   }
+// })
