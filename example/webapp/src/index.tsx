@@ -5,7 +5,7 @@ import { App }  from './App'
 
 import { WebRpcQueryClientProvider } from 'webrpc-react-query'
 
-import { client as queryClient } from './hmm'
+import { rpcQueryClient } from './rpc'
 
 // const queryClient = new QueryClient({
 //   defaultOptions: {
@@ -26,7 +26,7 @@ const root = ReactDOM.createRoot(
 // )
 
 root.render(
-  <WebRpcQueryClientProvider client={queryClient}>
+  <WebRpcQueryClientProvider client={rpcQueryClient}>
     <App />
   </WebRpcQueryClientProvider>
 )
