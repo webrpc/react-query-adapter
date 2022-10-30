@@ -52,7 +52,7 @@ You do so by adding a generic type to your `WebRpcClient` instance.
 
 ```ts
 import { Example } from './client.gen'
-import { WebRpcQueryClient } from '@webrpc/react-query
+import { WebRpcQueryClient } from '@webrpc/react-query'
 
 const rpc = new Example('http://localhost:4242', fetch)
 const client = new WebRpcQueryClient<typeof rpc, ['get', 'list']>(rpc)
@@ -65,7 +65,7 @@ Any other method from your contract will be considered a _mutation_. If you choo
 
 ## Local dev
 
-You can update `example/webapp/package.json" package to `"@webrpc/react-query": "workspace:../../"`
+You can update `example/webapp/package.json` package to `"@webrpc/react-query": "workspace:../../"`
 which will use the build from the local repo.
 
 
