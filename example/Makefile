@@ -11,10 +11,10 @@ generate-client:
 
 bootstrap:
 	rm -rf webapp/node_modules
-	cd webapp && yarn
+	cd webapp && pnpm i
 
 run-server:
 	@go run ./server
 
 run-client:
-	@cd webapp && yarn start
+	@cd webapp && pnpm start

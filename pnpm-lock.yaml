@@ -46,7 +46,7 @@ importers:
       webpack: 5.74.0
       webpack-cli: 4.10.0
       webpack-dev-server: 4.11.1
-      webrpc-react-query: workspace:../../
+      webrpc-react-query: ^0.1.0
     dependencies:
       '@tanstack/react-query': 4.13.4_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.24
