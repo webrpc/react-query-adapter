@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { rpc, client } from './hmm'
+import { rpcQueryClient } from './rpc'
 
 export const App = () => {
   // const queryClient = useQueryClient()
@@ -9,7 +9,7 @@ export const App = () => {
   //   return rpc.getUser({ userID: 1 })
   // })
 
-  const query = client.useQuery(['getUser', { userID: 1 }])
+  const query = rpcQueryClient.useQuery(['getUser', { userID: 1 }])
 
   return (
     <div className="App">
