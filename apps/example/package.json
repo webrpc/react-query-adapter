@@ -7,15 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint */**/*.ts*",
-    "ts": "tsc"
+    "lint": "tsc",
+    "ts": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@tanstack/react-query-devtools": "^4.24.4",
-    "@webrpc/react-query-adapter": "workspace:*",
-    "eslint-config-custom": "workspace:*"
+    "@webrpc/react-query-adapter": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

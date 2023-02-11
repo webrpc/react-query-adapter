@@ -1,39 +1,28 @@
 {
-  "name": "webrpc-react-query",
-  "version": "0.1.0",
-  "description": "react-query adapter for webrpc",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "scripts": {
-    "build": "rimraf ./dist && rollup -c --bundleConfigAsCjs",
-    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "files": [
-    "dist"
+  "name": "react-query-adapter",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
   ],
-  "dependencies": {},
-  "peerDependencies": {
-    "@tanstack/react-query": ">=4.10.1",
-    "react": ">=17.0.2"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:react-example": "turbo run dev --filter react-example",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "ts": "turbo run ts"
   },
   "devDependencies": {
-    "@tanstack/react-query": "^4.13.4",
-    "@types/node": "^18.7.14",
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^3.2.3",
-    "rollup-plugin-typescript2": "^0.34.1",
-    "tslib": "^2.4.0",
-    "typescript": "^4.8.4"
+    "prettier": "latest",
+    "turbo": "latest"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.26.0"
+  },
+  "packageManager": "pnpm@7.8.0"
 }
