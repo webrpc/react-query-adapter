@@ -1,37 +1,43 @@
 name: CI
 on:
-  push:
-    branches:
-      - "**"
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+          with:
+            fetch-depth: 2
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - name: Set up node with nvm
+        uses: dcodeIO/setup-node-nvm@master
+
+      - name: Set up pnpm cache
+        uses: actions/setup-node@v3
+        with:
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
   adapter:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: "pnpm"
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint --filter @webrpc/react-query-adapter && pnpm run build --filter @webrpc/react-query-adapter
+      - name: Lint and build adapter
+        run: pnpm run lint --filter @webrpc/react-query-adapter && pnpm run build --filter @webrpc/react-query-adapter
 
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint --filter react-example && pnpm run build --filter react-example
+      - run: pnpm install --filter react-example --frozen-lockfile
+      - name: Lint and run react example app
+        run: pnpm run lint --filter react-example && pnpm run build --filter react-example
