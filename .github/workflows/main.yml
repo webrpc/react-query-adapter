@@ -29,15 +29,16 @@ jobs:
         run: pnpm install --frozen-lockfile
 
   adapter:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Lint and build adapter
         run: pnpm run lint --filter @webrpc/react-query-adapter && pnpm run build --filter @webrpc/react-query-adapter
 
   build:
+    needs: adapter
     runs-on: ubuntu-latest
     steps:
-
       - run: pnpm install --filter react-example --frozen-lockfile
       - name: Lint and run react example app
         run: pnpm run lint --filter react-example && pnpm run build --filter react-example
