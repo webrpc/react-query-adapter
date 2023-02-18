@@ -12,13 +12,13 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Set up node with nvm
+        uses: dcodeIO/setup-node-nvm@master
+
       - name: Set up pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
-
-      - name: Set up node with nvm
-        uses: dcodeIO/setup-node-nvm@master
 
       - name: Set up pnpm cache
         uses: actions/setup-node@v3
