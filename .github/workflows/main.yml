@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-          with:
-            fetch-depth: 2
+        with:
+          fetch-depth: 2
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v2
