@@ -20,12 +20,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
-          cache: "pnpm"
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
+
+      - name: Set up pnpm cache
+        uses: actions/setup-node@v3
+        with:
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
