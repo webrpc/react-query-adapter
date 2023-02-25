@@ -12,8 +12,10 @@
     "lint": "tsc",
     "ts": "tsc --noEmit"
   },
+  "dependencies": {
+    "@tanstack/react-query": "^4.10.1"
+  },
   "peerDependencies": {
-    "@tanstack/react-query": "^4.10.1",
     "react": "^18.2.0"
   },
   "devDependencies": {
