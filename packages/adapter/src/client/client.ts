@@ -128,7 +128,9 @@ export class WebRpcClient<
     TPath extends MutationPaths<Api, QueryPrefixes> & string,
     TQueryInput extends inferHandlerInput<Api[TPath]>
   >(
-    filters: InvalidateQueryFilters & { queryKey: [TPath, TQueryInput] },
+    filters: InvalidateQueryFilters & {
+      queryKey: [TPath, Partial<TQueryInput>];
+    },
     options?: InvalidateOptions
   ) {
     return this.queryClient.invalidateQueries(filters, options);
@@ -153,7 +155,7 @@ export class WebRpcClient<
       QueryPrefixes
     >[TPath]["awaitedResponse"]
   >(
-    queryKey: [[TPath, TQueryInput]],
+    queryKey: [[TPath, Partial<TQueryInput>]],
     updater: Updater<TQueryInput | undefined, TQueryOutput | undefined>,
     options?: SetDataOptions
   ) {
@@ -164,7 +166,9 @@ export class WebRpcClient<
     TPath extends QueryPaths<Api, QueryPrefixes> & string,
     TQueryInput extends inferHandlerInput<Api[TPath]>
   >(
-    filters: InvalidateQueryFilters & { queryKey: [TPath, TQueryInput] },
+    filters: InvalidateQueryFilters & {
+      queryKey: [TPath, Partial<TQueryInput>];
+    },
     options?: CancelOptions
   ) {
     return this.queryClient.cancelQueries(filters, options);

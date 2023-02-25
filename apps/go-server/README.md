@@ -1,8 +1,7 @@
-webrpc react-query example
-==========================
+# webrpc react-query example
 
-* Server: Go
-* Client: Web Browser (Typescript)
+- Server: Go
+- Client: Web Browser (Typescript)
 
 Simple client+server app with Go api backend (server) and Typescript Webapp (client).
 

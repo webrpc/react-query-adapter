@@ -1,7 +1,7 @@
 {
   "name": "@webrpc/react-query-adapter",
   "description": "webRPC react-query client",
-  "author": "",
+  "author": "Vojtech Oupicky",
   "license": "ISC",
   "version": "0.0.1",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
     "lint": "tsc",
     "ts": "tsc --noEmit"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@tanstack/react-query": "^4.10.1",
     "react": "^18.2.0"
   },
