@@ -1,0 +1,12 @@
+{
+  "name": "go-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "make run-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
